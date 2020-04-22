@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using WebApiFinal.Models;
 namespace WebApiFinal
 {
     public class DBnews : DbContext
@@ -13,18 +13,10 @@ namespace WebApiFinal
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<New>().HasData(
-            new New() { ID = 1, Description = "blabla" });
+            new New() { ID = 54, Description = "blabla" });
         }
-
-        public New GetById(int id)
-        {
-            foreach (var news in NewsInfo)
-            {
-                if (news.ID == id)
-                    return news;
-            }
-            return null;
-        }
+        
+       
 
         
     }

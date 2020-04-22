@@ -1,10 +1,11 @@
 ﻿using System;
-namespace WebApiFinal
+namespace WebApiFinal.Models
 {
-    public class New
+    public class New : BaseEntity
     {
-        public int ID { get; set; }
+      
         public string Description { get; set; }
+        public bool Test { get; set; }
         public New()
         {
         }

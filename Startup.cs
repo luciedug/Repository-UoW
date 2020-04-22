@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebApiFinal.Repositories;
 
 namespace WebApiFinal
 {
@@ -24,6 +25,9 @@ namespace WebApiFinal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DBnews>();
+            services.AddScoped<DBnews>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMvc().SetCompatibilityVersion
            (CompatibilityVersion.Version_2_1);
             services.AddControllers();
