@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApiFinal.Models;
@@ -7,7 +8,7 @@ namespace WebApiFinal.Controllers
 {
     public class NewsController : ControllerBase
     {
-        private IRepository<New> newsRepository;
+        private IRepositoryNew newsRepository;
         private IUnitOfWork _UoW;
         public NewsController(IUnitOfWork _UoW)
         {
@@ -21,7 +22,11 @@ namespace WebApiFinal.Controllers
         /// <param name="id"></param>
         [HttpGet]
         [Route("")]
-        public IEnumerable<New> GetAllNews() => newsRepository.GetAll();
+        public async Task<IEnumerable<New>> GetAllNews()
+        {
+            return await newsRepository.GetAllAsync();
+        }
+        
 
         /// <summary>
         /// Get a news from database
@@ -29,7 +34,12 @@ namespace WebApiFinal.Controllers
         /// <param name="id"></param>
         [HttpGet]
         [Route("{Id}")]
-        public New GetById(int Id) => newsRepository.GetById(Id);
+        public async Task<New> GetNewsbyId(int Id)
+        {
+            return await newsRepository.GetbyIdAsync(Id);
+
+        }
+        //public New GetById(int Id) => newsRepository.GetById(Id);
 
         /// <summary>
         /// Add a news to database
@@ -38,10 +48,10 @@ namespace WebApiFinal.Controllers
         [HttpPost]
         [Route("")]
         [AllowAnonymous]
-        public void Add([FromBody] New news)
+        public async Task Add([FromBody] New news)
         {
-            newsRepository.Insert(news);
-            _UoW.Commit();
+            newsRepository.InsertNew(news);
+            await _UoW.CommitAsync();
         }
 
       
@@ -53,9 +63,9 @@ namespace WebApiFinal.Controllers
         [HttpDelete]
         [Route("{Id}")]
         [AllowAnonymous]
-        public void Delete(int Id) {
-            newsRepository.Delete(Id);
-            _UoW.Commit();
+        public async Task Delete(int Id) {
+            newsRepository.DeleteNew(Id);
+            await _UoW.CommitAsync();
         }
 
 

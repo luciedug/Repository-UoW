@@ -1,12 +1,11 @@
-﻿using System;
-using WebApiFinal.Models;
+﻿using System.Threading.Tasks;
 
 namespace WebApiFinal.Repositories
 {
     public interface IUnitOfWork
     {
-        IRepository<New> NewsRepository { get; }
-        void Commit();
+        IRepositoryNew NewsRepository { get; }
+        Task CommitAsync();
         void Rollback();
     }
 }

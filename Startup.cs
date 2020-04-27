@@ -26,7 +26,7 @@ namespace WebApiFinal
         {
             services.AddDbContext<DBnews>();
             services.AddScoped<DBnews>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepositoryNew), typeof(NewsRepository));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMvc().SetCompatibilityVersion
            (CompatibilityVersion.Version_2_1);

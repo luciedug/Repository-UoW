@@ -1,21 +1,22 @@
-﻿using WebApiFinal.Models;
+﻿using System.Threading.Tasks;
 
 namespace WebApiFinal.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DBnews _databaseContext;
-        private IRepository<New> _newsRepository;
+        private IRepositoryNew _newsRepository;
 
         public UnitOfWork(DBnews databaseContext)
         { _databaseContext = databaseContext; }
 
-        public IRepository<New> NewsRepository
+        public IRepositoryNew NewsRepository
         {
-            get { return _newsRepository = _newsRepository ?? new Repository<New>(_databaseContext); }
+            get { return _newsRepository = _newsRepository ?? new NewsRepository(_databaseContext); }
         }
-        public void Commit()
-        { _databaseContext.SaveChanges(); }
+        public async Task CommitAsync()
+        {
+           await _databaseContext.SaveChangesAsync(); }
 
         public void Rollback()
         { _databaseContext.Dispose(); }
