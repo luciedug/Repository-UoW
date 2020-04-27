@@ -39,7 +39,6 @@ namespace WebApiFinal.Controllers
             return await newsRepository.GetbyIdAsync(Id);
 
         }
-        //public New GetById(int Id) => newsRepository.GetById(Id);
 
         /// <summary>
         /// Add a news to database
